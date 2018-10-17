@@ -37,6 +37,7 @@ using (BusinessRulesEntities businessRules = new BusinessRulesEntities())
                     x.checked_date = DateTime.Now;
                 });
                 
+                 exec = businessRules.SaveChanges();
                 
             
             get
