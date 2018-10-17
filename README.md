@@ -38,8 +38,23 @@ using (BusinessRulesEntities businessRules = new BusinessRulesEntities())
                 });
                 
                  exec = businessRules.SaveChanges();
-                
             
+            //Insert
+            tbl_MLS_DataRequired dataRequired = new tbl_MLS_DataRequired
+                {
+                    field_id = dataParam,
+                    website_id = website,
+                    checked_by = user,
+                    checked_date = DateTime.Now,
+                    category_id = businessRules.tbl_MLS_Category.Where(a => a.Category_Name == category).Select(y => y.category_id).FirstOrDefault()
+                };
+
+                businessRules.tbl_MLS_DataRequired.Add(dataRequired);
+             exec = businessRules.SaveChanges();
+             
+             
+             
+             
             get
             $.ajax({
         type: 'POST',
