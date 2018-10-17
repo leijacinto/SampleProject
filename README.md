@@ -1,6 +1,9 @@
 # SampleProject
 
 
+
+
+
 using (BusinessRulesEntities businessRules = new BusinessRulesEntities())
             {
                 var query = (from c in businessRules.tbl_MLS_Coverage
@@ -23,6 +26,18 @@ using (BusinessRulesEntities businessRules = new BusinessRulesEntities())
             
             return JsonConvert.SerializeObject(new { Success = true, Message = "Success", data = new { record = dt } });
             
+            //update query
+             businessRules.tbl_MLS_DataRequired
+             .Where(a => a.website_id == website && a.category_id == businessRules.tbl_MLS_Category.Where(b => b.Category_Name == category)
+             .Select(s => s.category_id).FirstOrDefault()).ToList()
+             .ForEach(x => 
+                {
+                    x.field_id = dataParam;
+                    x.checked_by = user;
+                    x.checked_date = DateTime.Now;
+                });
+                
+                
             
             get
             $.ajax({
